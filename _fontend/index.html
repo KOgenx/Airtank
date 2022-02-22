@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>@@ehostename@@</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+
+    <link rel="stylesheet" href="styler.css">
+</head>
+
+<body>
+    <main>
+        <header class="main__header">
+            <time id="date" class="updateDate">UPDATED: 14:51:43</time>           
+            <h1>AIRTANK</h1>
+        </header>
+
+        <section class="list">
+            <div class="list__row">
+                <p class="list__def">
+                    CO<small>2</small>
+                </p>
+                <p class="list__data">
+                    @@C02@@ ppm
+                </p>
+                <p class="list__tag-wrapper">
+                    <span class="tag">1000+ = </span>
+                </p>
+            </div>
+
+            <div class="list__row">
+                <p class="list__def">
+                    PM<small>1</small>
+                </p>
+                <p class="list__data">
+                    @@PM01@@ µg/m³
+                </p>
+            </div>
+
+            <div class="list__row">
+                <p class="list__def">
+                    PM<small>2.5</small>
+                </p>
+                <p class="list__data">
+                    @@PM02@@ µg/m³
+                </p>
+                <p class="list__tag-wrapper">
+                    <span class="tag">20+ = </span>
+                </p>
+            </div>
+
+            <div class="list__row">
+                <p class="list__def">
+                    PM<small>10</small>
+                </p>
+                <p class="list__data">
+                    @@PM10@@ µg/m³
+                </p>
+                <p class="list__tag-wrapper">
+                    <span class="tag">40+ = </span>
+                </p>
+            </div>
+
+            <div class="list__row">
+                <p class="list__def">
+                    Temperature
+                </p>
+                <p class="list__data">
+                    @@tmp@@ °C
+                </p>
+            </div>
+            <div class="list__row">
+                <p class="list__def">
+                    Humidity
+                </p>
+                <p class="list__data">
+                    @@hum@@ %
+                </p>
+            </div>
+        </section>
+        <a href="@@ledUrl@@" class="ledBTN openModal">
+            LED <span>@@ledState@@</span>
+        </a>
+        
+        <a href="#sysInfo" class="openModal">Info</a>
+        <a href="#sysSettings" class="openModal">Settings</a>
+        <a href="#sysFunctions" class="openModal">Functions</a>
+    </main>
+
+    <!-- Sysinfo modal -->
+    <section id="sysInfo" class="modal">
+
+        <header>
+            <p>System Info</p>
+            <a href="#" title="Close" class="close">x</a>
+        </header>
+        <section class="list">
+            <div class="list__row">
+                <p class="list__def">
+                    Restart reason
+                </p>
+                <p class="list__data">
+                    @@espRestart@@
+                </p>
+            </div>
+            <div class="list__row">
+                <p class="list__def">
+                    ESP chip ID
+                </p>
+                <p class="list__data">
+                    @@espChipId@@
+                </p>
+            </div>
+            <div class="list__row">
+                <p class="list__def">
+                    Core version
+                </p>
+                <p class="list__data">
+                    @@espCoreV@@
+                </p>
+            </div>
+            <div class="list__row">
+                <p class="list__def">
+                    CPU frequency
+                </p>
+                <p class="list__data">
+                    @@espMhz@@ Mhz
+                </p>
+            </div>
+            <div class="list__row">
+                <p class="list__def">
+                    Sketch size
+                </p>
+                <p class="list__data">
+                    @@espSketch@@ bit
+                </p>
+            </div>
+            <div class="list__row">
+                <p class="list__def">
+                    JSON address
+                </p>
+                <p class="list__data">
+                    <a href="@@espJson@@">JSON</a>
+                </p>
+            </div>
+            <div class="list__row">
+                <p class="list__def">
+                    Up Time
+                </p>
+                <p class="list__data">
+                    @@espUptime@@
+                </p>
+            </div>
+        </section>
+    </section>
+
+    <!-- SysSettings modal -->
+    <section id="sysSettings" class="modal">
+        <header>
+            <p>System Settings</p>
+            <a href="#" title="Close" class="close">x</a>
+        </header>
+        <form method="post" enctype="application/x-www-form-urlencoded" action="/settings">
+            <label for="SwitchOFF">Display OFF hour <em>(0 - 23)</em></label>
+            <input type="text" name="SwitchOFF" value="@@switchOff@@" inputmode="numeric" pattern="[0-9]*">
+
+            <label for="SwitchON">Display ON hour <em>(0 - 23)</em></label>
+            <input type="text" name="SwitchON" value="@@switchOn@@" inputmode="numeric" pattern="[0-9]*">
+
+            <label for="tempOffset">Temperature offset <em>(0.9 = 90%)</em></label>
+            <input type="text" name="tempOffset" value="@@tempOffset@@">
+            
+            <input type="submit" value="Save">
+        </form>
+    </section>
+    <section id="sysFunctions" class="modal">
+        <header>
+            <p>Functions</p>
+            <a href="#" title="Close" class="close">x</a>
+        </header>
+        <section class="list">
+            <div class="list__row">
+        <a href="/reboot" class="btn">Reboot</a>
+        <a href="/displayoff" class="btn">Display Off</a>
+        <a href="/displayon" class="btn">Display ON</a>
+    </div>    
+    </section>
+
+    </section>
+
+
+
+</body>
+<script src="scripter.js"></script>
+
+</html>
