@@ -232,23 +232,23 @@ void displayFontSmall(String ln1, String ln2, String ln3) {
 // Webserver Functions
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-void handleJson() { server->send(200, "text/plain", GenerateJson()); }
-
 void handleLED() {
-  String s = STATE_page;
   //Toggle LED
   int currState = digitalRead(led);
   if (currState == LOW) {
     digitalWrite(led, HIGH);
+    server->send(200, "text/html", StatePage("LED is on"));
   } else {
     digitalWrite(led, LOW);
+    server->send(200, "text/html", StatePage("LED is off"));
   }
-  // Toggle Button Text
-  currState = digitalRead(led);
-  String LEDState = "unset";
-  if (currState == 1) {LEDState = "LED is on";} else {LEDState = "LED is off";}
-  s.replace("@@txtState@@", String(LEDState));
-  server->send(200, "text/html", s);
+}
+
+String StatePage(String msg) {
+  String s = STATE_page;
+  s.replace("@@txtState@@", msg);
+  s.replace("@@ehostename@@", String(HOST_NAME));
+  return String(s);
 }
 
 void handleRoot() { 
@@ -308,8 +308,7 @@ void handleSettings() {
       counterARG++;
     }
   }
-  s.replace("@@txtState@@", "Settings saved!");
-  server->send(200, "text/html", s);
+  server->send(200, "text/html", StatePage("Settings saved!"));
 }
 
 void handleNotFound() {
@@ -326,6 +325,8 @@ void handleNotFound() {
   }
   server->send(404, "text/plain", message);
 }
+
+void handleJson() { server->send(200, "text/plain", GenerateJson()); }
 
 String GenerateJson() {
   String message = "";
