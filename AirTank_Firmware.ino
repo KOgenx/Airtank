@@ -53,7 +53,7 @@ float tempOffset  = 1; //#EDIT Temperature Offset (0.9 = 90%)
 int switchOff = 23; //#EDIT Display off time (23:00)
 int switchOn  = 7; //#EDIT Display on time (7:00)
 const long utcOffsetInSeconds = 3600; // Timezone (Berlin)
-String overwrite = "No";
+String overwrite = "No"; // Sleepmode overwrite
 
 const int sleepUpdateFrequency = 900000; //Display off check (15min)
 long sleeplastUpdate;
@@ -118,6 +118,9 @@ void setup() {
   server->on("/json", handleJson);
   server->on("/led", handleLED);
   server->on("/settings", handleSettings);
+  server->on("/reboot", handleReboot);
+  server->on("/displayoff", handleDisplayoff);
+  server->on("/displayon", handleDisplayon);
   server->onNotFound(handleNotFound);
   server->begin();
 
@@ -144,7 +147,7 @@ void loop() {
 //Display Functions
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void sleepScreen(long now) {
-  Serial.println("Active");
+  //Serial.println("Active");
   if ((now - sleeplastUpdate) > sleepUpdateFrequency) {
     timeClient.update();
     int ntpHour = timeClient.getHours();
@@ -244,6 +247,21 @@ void handleLED() {
     digitalWrite(led, LOW);
     server->send(200, "text/html", StatePage("LED is off"));
   }
+}
+
+void handleReboot() {
+  server->send(200, "text/html", StatePage("Rebooting!"));
+  delay(1000);
+  ESP.restart();
+}
+
+void handleDisplayoff() {
+  display.displayOff();
+  server->send(200, "text/html", StatePage("Display is off!"));
+}
+void handleDisplayon() {
+  display.displayOn();
+  server->send(200, "text/html", StatePage("Display is on!"));
 }
 
 String StatePage(String msg) {
