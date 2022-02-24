@@ -53,6 +53,7 @@ float tempOffset  = 1; //#EDIT Temperature Offset (0.9 = 90%)
 int switchOff = 23; //#EDIT Display off time (23:00)
 int switchOn  = 7; //#EDIT Display on time (7:00)
 const long utcOffsetInSeconds = 3600; // Timezone (Berlin)
+String overwrite = "No";
 
 const int sleepUpdateFrequency = 900000; //Display off check (15min)
 long sleeplastUpdate;
@@ -136,13 +137,14 @@ void loop() {
   long t = millis();
   server->handleClient();
   updateScreen(t);
-  sleepScreen(t);
+  if (overwrite == "No") {sleepScreen(t);}
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //Display Functions
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 void sleepScreen(long now) {
+  Serial.println("Active");
   if ((now - sleeplastUpdate) > sleepUpdateFrequency) {
     timeClient.update();
     int ntpHour = timeClient.getHours();
@@ -261,7 +263,15 @@ void handleRoot() {
   String LEDState = "unset";
   if (LEDread == 1) {LEDState = "is on";} else {LEDState = "is off";}
   String LEDUrl = "http://" + WiFi.localIP().toString() + "/led";
-           
+
+  if (overwrite == "Yes") {
+    s.replace("@@overwriteNo@@", " ");
+    s.replace("@@overwriteYes@@", "selected");
+  } else {
+    s.replace("@@overwriteNo@@", "selected");
+    s.replace("@@overwriteYes@@", " ");
+  }
+
   s.replace("@@C02@@", String(htmlCO2));
   s.replace("@@PM01@@", String(htmlPM01));
   s.replace("@@PM02@@", String(htmlPM02));
@@ -305,6 +315,11 @@ void handleSettings() {
     else if (server->argName(i) == "tempOffset")
     {
       tempOffset = server->arg(i).toFloat();
+      counterARG++;
+    }
+    else if (server->argName(i) == "overWrite")
+    {
+      overwrite = server->arg(i);
       counterARG++;
     }
   }

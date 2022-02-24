@@ -88,7 +88,7 @@
 
         <a href="#sysInfo" class="openModal">Info</a>
         <a href="#sysSettings" class="openModal">Settings</a>
-        <!-- <a href="#sysFunctions" class="openModal">Functions</a> -->
+        <a href="#sysFunctions" class="openModal">Functions</a>
     </main>
 
     <!-- Sysinfo modal -->
@@ -165,11 +165,17 @@
             <a href="#" title="Close" class="close">x</a>
         </header>
         <form method="post" enctype="application/x-www-form-urlencoded" action="/settings">
-            <label for="SwitchOFF">Display OFF hour <em>(0 - 23)</em></label>
+            <label for="SwitchOFF">Sleepmode start hour <em>(0 - 23)</em></label>
             <input type="text" name="SwitchOFF" value="@@switchOff@@" inputmode="numeric" pattern="[0-9]*">
 
-            <label for="SwitchON">Display ON hour <em>(0 - 23)</em></label>
+            <label for="SwitchON">Sleepmode stop hour <em>(0 - 23)</em></label>
             <input type="text" name="SwitchON" value="@@switchOn@@" inputmode="numeric" pattern="[0-9]*">
+
+            <label for="overWrite">Disable Sleepmode</label>
+            <select name="overWrite" id="overWrite">
+                <option value="No" @@overwriteNo@@>No</option>
+                <option value="Yes" @@overwriteYes@@>Yes</option>
+            </select>
 
             <label for="tempOffset">Temperature offset <em>(0.9 = 90%)</em></label>
             <input type="text" name="tempOffset" value="@@tempOffset@@">
@@ -177,7 +183,7 @@
             <input type="submit" value="Save">
         </form>
     </section>
-    <!-- not implemented yet 
+
     <section id="sysFunctions" class="modal">
         <header>
             <p>Functions</p>
@@ -190,11 +196,6 @@
         <a href="/displayon" class="btn">Display ON</a>
     </div>    
     </section>
--->
-    
-
-
-
 </body>
 <script src="scripter.js"></script>
 
