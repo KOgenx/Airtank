@@ -96,10 +96,21 @@ a.btn {
         color           : #fff;
     }
 }
-.ledBTN.openModal {
+.pull-left {
     float: left;
 }
-
+.btn-reload {
+    display          : inline-block;
+    width            : clamp(1.3rem, 0.5800rem + 3.2000vw, 2.5rem);
+    padding          : 0;
+    height           : clamp(1.3rem, 0.5800rem + 3.2000vw, 2.5rem);
+    background-color : transparent;
+    background-size  : contain;
+    border           : none;
+    background-repeat: no-repeat;
+    transform: translateY(11%);
+    background-image : url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='36' height='36'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M5.463 4.433A9.961 9.961 0 0 1 12 2c5.523 0 10 4.477 10 10 0 2.136-.67 4.116-1.81 5.74L17 12h3A8 8 0 0 0 6.46 6.228l-.997-1.795zm13.074 15.134A9.961 9.961 0 0 1 12 22C6.477 22 2 17.523 2 12c0-2.136.67-4.116 1.81-5.74L7 12H4a8 8 0 0 0 13.54 5.772l.997 1.795z' fill='rgba(255,255,255,1)'/%3E%3C/svg%3E");
+}
 .list {
     &__row {
         display        : flex;
@@ -217,17 +228,19 @@ form {
     flex-direction  : column;
     padding         : 1rem;
     background-color: #fff;
-    
+
     select,
     input {
-        margin-bottom: 1rem;
-        font-weight  : 400;
-        border-radius: 0;
-        padding      : 0.5rem;
-        border       : 1px solid #000;
-        min-width    : 300px;
+        margin-bottom   : 1rem;
+        font-weight     : 400;
+        border-radius   : 0;
+        padding         : 0.5rem;
+        border          : 1px solid #000;
+        background-color: #fff;
+        color           : #000;
+        min-width       : 300px;
+        height          : 40px;
     }
-
     em {
         font-weight: 400;
         font-style : normal;
