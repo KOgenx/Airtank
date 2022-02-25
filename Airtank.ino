@@ -5,6 +5,7 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 #include "uptime_formatter.h"
+#include <ArduinoOTA.h>
 
 // Needed for Wifimanager
 #include <DNSServer.h>
@@ -133,6 +134,7 @@ void setup() {
   espJson = ("http://" + WiFi.localIP().toString() + "/json");
 
 }
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //Main Loop
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

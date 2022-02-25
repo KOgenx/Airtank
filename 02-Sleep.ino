@@ -1,5 +1,4 @@
 void sleepScreen(long now) {
-
   if ((now - sleeplastUpdate) > sleepUpdateFrequency && (overwrite == "No")) {
     timeClient.update();
     int ntpHour = timeClient.getHours();

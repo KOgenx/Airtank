@@ -1,7 +1,3 @@
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-// Webserver Functions
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 void handleLED() {
   //Toggle LED
   int currState = digitalRead(led);

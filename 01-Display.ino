@@ -1,7 +1,3 @@
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-//Display Functions
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 void updateScreen(long now) {
   if ((now - lastUpdate) > updateFrequency) {
     switch (counter) {
