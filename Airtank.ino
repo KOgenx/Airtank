@@ -5,7 +5,6 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 #include "uptime_formatter.h"
-#include <ArduinoOTA.h>
 
 // Needed for Wifimanager
 #include <DNSServer.h>
@@ -149,7 +148,6 @@ void loop() {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //Temp Offset Function
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 String temperatureOffset(float originalTemp){
   float tempsum = originalTemp * tempOffset;
   return String(tempsum);
