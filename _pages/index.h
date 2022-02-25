@@ -141,7 +141,7 @@ const char MAIN_page[] PROGMEM = R"=====(
                     Sketch size
                 </p>
                 <p class="list__data">
-                    @@espSketch@@ bit
+                    @@espSketch@@ KB
                 </p>
             </div>
             <div class="list__row">
